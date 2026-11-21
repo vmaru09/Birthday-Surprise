@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Little World Made for You ❤️</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+
+  <!-- Google Fonts for Romantic & Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-countdown">
+
+  <!-- Starry & Heart Particle Canvas Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Ambient Audio Controls -->
+  <div class="audio-control-wrapper" id="audioWrapper">
+    <button id="audioToggleBtn" class="audio-btn" aria-label="Toggle Music" title="Play soft birthday music">
+      <div class="vinyl-disc" id="vinylDisc">
+        <span class="music-icon">🎵</span>
+      </div>
+      <span class="audio-label" id="audioLabel">Play Music</span>
+    </button>
+    <audio id="bgMusic" preload="auto" loop></audio>
+  </div>
+
+
+
+  <!-- ========================================== -->
+  <!-- 1. COUNTDOWN SCREEN (Before Midnight)      -->
+  <!-- ========================================== -->
+  <main id="countdownSection" class="screen-section active">
+    <div class="glass-container countdown-card">
+      <div class="whisper-tag">
+        <span class="sparkle">✨</span>
+        <span class="whisper-text">Something beautiful is waiting for you...</span>
+        <span class="sparkle">✨</span>
+      </div>
+
+      <h1 class="hero-title">
+        For <span class="recipient-name glow-name">My Love</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        A little surprise, made with love, just for you. ❤️
+      </p>
+
+      <!-- Live Glowing Countdown -->
+      <div class="timer-wrapper">
+        <div class="time-block">
+          <div class="time-box">
+            <span class="time-value" id="days">00</span>
+          </div>
+          <span class="time-label">DAYS</span>
+        </div>
+
+        <div class="time-separator">:</div>
+
+        <div class="time-block">
+          <div class="time-box">
+            <span class="time-value" id="hours">00</span>
+          </div>
+          <span class="time-label">HOURS</span>
+        </div>
+
+        <div class="time-separator">:</div>
+
+        <div class="time-block">
+          <div class="time-box">
+            <span class="time-value" id="minutes">00</span>
+          </div>
+          <span class="time-label">MINUTES</span>
+        </div>
+
+        <div class="time-separator">:</div>
+
+        <div class="time-block">
+          <div class="time-box">
+            <span class="time-value" id="seconds">00</span>
+          </div>
+          <span class="time-label">SECONDS</span>
+        </div>
+      </div>
+
+      <div class="countdown-footer">
+        <p class="lock-notice">
+          <span class="lock-icon">🔒</span> Unlocks automatically at 12:00 AM on your birthday
+        </p>
+
+        <button id="sneakPeekBtn" class="sneak-peek-btn">
+          <span>A little sneak peek...</span>
+          <span class="btn-sparkle">🪄</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 2. MIDNIGHT SURPRISE UNLOCKED SCREEN       -->
+  <!-- ========================================== -->
+  <main id="surpriseSection" class="screen-section">
+    
+    <!-- Hero Midnight Greeting -->
+    <header class="surprise-hero">
+      <div class="floating-heart-hero">💖</div>
+      <h1 class="midnight-title" id="midnightGreeting">
+        Happy Birthday, my love. ❤️
+      </h1>
+      <p class="midnight-sub" id="midnightSub">
+        Today is the birthday of someone who makes my world a little more beautiful just by being in it.
+      </p>
+
+      <div class="scroll-prompt">
+        <span>Scroll down to open your memories</span>
+        <div class="down-arrow">↓</div>
+      </div>
+    </header>
+
+    <!-- SECTION 3: Our Memories (Photo Polaroids) -->
+    <section class="memories-section" id="memoriesSection">
+      <div class="section-badge">
+        <span>Our Memories 📸</span>
+      </div>
+      <h2 class="section-title">Moments I Hold Close to My Heart</h2>
+      <p class="section-desc">Every smile, every glance, every moment we shared together.</p>
+
+      <div class="polaroid-gallery" id="polaroidGallery">
+        <!-- Generated dynamically via config.js -->
+      </div>
+    </section>
+
+    <!-- SECTION 4: The Final Birthday Letter -->
+    <section class="letter-section" id="letterSection">
+      <div class="section-badge">
+        <span>One Last Surprise 💌</span>
+      </div>
+      <h2 class="section-title" id="letterSectionTitle">A Letter Just For You</h2>
+      <p class="section-desc">Because words from the heart are the truest gift I can ever give you.</p>
+
+      <!-- Interactive 3D Envelope Container -->
+      <div class="envelope-scene">
+        <div class="envelope" id="envelopeWrapper">
+          <div class="envelope-back"></div>
+          
+          <!-- The Letter Inside -->
+          <div class="letter" id="letterPaper">
+            <div class="letter-inner">
+              <div class="letter-stamp">💌</div>
+              <div class="letter-badge" id="letterBadge">For Your Eyes Only</div>
+              <h3 class="letter-salutation" id="letterSalutation">My Dearest,</h3>
+              
+              <div class="letter-body" id="letterBody">
+                <!-- Typewriter text injected here -->
+              </div>
+
+              <div class="letter-closing" id="letterClosing">
+                Happy Birthday, my love. ❤️
+              </div>
+              <div class="letter-signature" id="letterSignature">
+                — Yours, always.
+              </div>
+            </div>
+          </div>
+
+          <div class="envelope-front-left"></div>
+          <div class="envelope-front-right"></div>
+          <div class="envelope-front-bottom"></div>
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          
+          <!-- Wax Seal Button -->
+          <button class="wax-seal" id="waxSealBtn" aria-label="Open Letter">
+            <span class="seal-heart">❤️</span>
+            <span class="seal-prompt">Tap to open</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Letter Actions -->
+      <div class="letter-actions" id="letterActions">
+        <button id="sendLoveBtn" class="love-blast-btn">
+          <span>Send A Heart ❤️</span>
+        </button>
+        <button id="replayLetterBtn" class="replay-btn">
+          <span>Read Again 🔄</span>
+        </button>
+      </div>
+
+      <!-- Romantic Closing Sign-off -->
+      <footer class="final-signoff">
+        <p class="final-quote">
+          “You are not just a part of my life.<br>
+          You are one of the most beautiful reasons I love my life.”
+        </p>
+        <div class="eternal-tag">Forever & Always ❤️</div>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: Sneak Peek Tease Dialog             -->
+  <!-- ========================================== -->
+  <div class="modal-overlay" id="sneakPeekModal">
+    <div class="modal-card">
+      <div class="modal-icon">🤫</div>
+      <h3 class="modal-title">Caught You Sneaking!</h3>
+      <p class="modal-message" id="sneakPeekText">
+        Nice try, cutie! But the lock is enchanted. Only midnight can break it. ✨
+      </p>
+      <button class="modal-close-btn" id="closeModalBtn">I promise to wait! 💕</button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- LIGHTBOX: Photo Zoom Modal                 -->
+  <!-- ========================================== -->
+  <div class="lightbox-overlay" id="lightboxModal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxCloseBtn">&times;</button>
+      <img id="lightboxImg" src="" alt="Memory">
+      <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

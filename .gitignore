@@ -1,0 +1,15 @@
+# System files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Temp files
+*.tmp
+*.bak
+PUT_YOUR_PHOTOS_HERE.txt
