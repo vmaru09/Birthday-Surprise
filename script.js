@@ -40,6 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightboxCaption = document.getElementById("lightboxCaption");
   const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
 
+  // Video Memory Elements
+  const memoryVideo      = document.getElementById("memoryVideo");
+  const videoPlayOverlay = document.getElementById("videoPlayOverlay");
+  const vidPlayPauseBtn  = document.getElementById("vidPlayPauseBtn");
+  const vidPlayIcon      = document.getElementById("vidPlayIcon");
+  const vidProgressBar   = document.getElementById("vidProgressBar");
+  const vidProgressFill  = document.getElementById("vidProgressFill");
+  const vidMuteBtn       = document.getElementById("vidMuteBtn");
+  const vidMuteIcon      = document.getElementById("vidMuteIcon");
+  const vidFullscreenBtn = document.getElementById("vidFullscreenBtn");
+
   // Envelope & Letter Elements
   const waxSealBtn = document.getElementById("waxSealBtn");
   const envelopeWrapper = document.getElementById("envelopeWrapper");
@@ -60,6 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (letterSalutation) letterSalutation.textContent = CONFIG.letter.salutation;
   if (letterClosing) letterClosing.textContent = CONFIG.letter.closing;
   if (letterSignature) letterSignature.textContent = CONFIG.letter.signature;
+  const videoCaptionLine = document.getElementById("videoCaptionLine");
+  if (videoCaptionLine && CONFIG.videoCaption) videoCaptionLine.textContent = CONFIG.videoCaption;
+  if (memoryVideo && CONFIG.videoFile) {
+    // Update <source> tags
+    memoryVideo.querySelectorAll("source").forEach(s => {
+      if (s.type === "video/mp4") s.src = CONFIG.videoFile;
+    });
+    memoryVideo.load();
+  }
 
   // 3. Render Polaroid Memories Gallery
   function renderMemories() {
@@ -157,6 +177,78 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightboxModal) lightboxModal.classList.remove("active");
   });
 
+  // 3.5 Video Memory Player
+  function initVideoPlayer() {
+    if (!memoryVideo) return;
+
+    // --- Overlay tap to start ---
+    if (videoPlayOverlay) {
+      videoPlayOverlay.addEventListener("click", () => {
+        videoPlayOverlay.classList.add("hidden");
+        memoryVideo.play().catch(() => {});
+      });
+    }
+
+    // --- Play / Pause button ---
+    function updatePlayIcon() {
+      if (vidPlayIcon) vidPlayIcon.textContent = memoryVideo.paused ? "▶" : "⏸";
+    }
+
+    if (vidPlayPauseBtn) {
+      vidPlayPauseBtn.addEventListener("click", () => {
+        if (memoryVideo.paused) {
+          memoryVideo.play().catch(() => {});
+        } else {
+          memoryVideo.pause();
+        }
+      });
+    }
+
+    memoryVideo.addEventListener("play",  updatePlayIcon);
+    memoryVideo.addEventListener("pause", updatePlayIcon);
+
+    // Hide overlay once video actually starts
+    memoryVideo.addEventListener("playing", () => {
+      if (videoPlayOverlay) videoPlayOverlay.classList.add("hidden");
+    });
+
+    // --- Progress bar ---
+    memoryVideo.addEventListener("timeupdate", () => {
+      if (!memoryVideo.duration) return;
+      const pct = (memoryVideo.currentTime / memoryVideo.duration) * 100;
+      if (vidProgressFill) vidProgressFill.style.width = pct + "%";
+    });
+
+    if (vidProgressBar) {
+      vidProgressBar.addEventListener("click", (e) => {
+        const rect = vidProgressBar.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        memoryVideo.currentTime = ratio * memoryVideo.duration;
+      });
+    }
+
+    // --- Mute toggle ---
+    if (vidMuteBtn) {
+      vidMuteBtn.addEventListener("click", () => {
+        memoryVideo.muted = !memoryVideo.muted;
+        if (vidMuteIcon) vidMuteIcon.textContent = memoryVideo.muted ? "🔇" : "🔊";
+      });
+    }
+
+    // --- Fullscreen ---
+    if (vidFullscreenBtn) {
+      vidFullscreenBtn.addEventListener("click", () => {
+        const wrap = memoryVideo.closest(".video-frame-wrapper") || memoryVideo;
+        if (document.fullscreenElement) {
+          document.exitFullscreen?.();
+        } else {
+          (wrap.requestFullscreen || wrap.webkitRequestFullscreen || (() => {})).call(wrap);
+        }
+      });
+    }
+  }
+  initVideoPlayer();
+
   // 4. Live Countdown & Midnight Logic
   function calculateTimeLeft() {
     // Parse target date
@@ -171,8 +263,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateCountdownUI() {
     const diff = calculateTimeLeft();
 
-    if (diff <= 0 || isUnlockedPreview) {
-      // Midnight has arrived or preview is active!
+    if (diff <= 0) {
+      // Midnight has arrived — unlock the surprise!
       triggerMidnightSurprise();
       return;
     }

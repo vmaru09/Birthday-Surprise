@@ -668,6 +668,187 @@ body {
 }
 
 /* ==========================================================
+   VIDEO MEMORY SECTION 🎞️
+   ========================================================== */
+.video-memory-section {
+  text-align: center;
+  padding: 80px 24px 60px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.video-frame-wrapper {
+  position: relative;
+  margin: 0 auto 24px;
+  max-width: 640px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.6),
+    0 0 50px rgba(255, 101, 132, 0.15);
+}
+
+/* Film-strip top & bottom decoration */
+.video-film-strip {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.video-film-strip::before {
+  content: "⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛";
+  display: block;
+  color: #2a2a2a;
+  font-size: 20px;
+  letter-spacing: 4px;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+/* The <video> itself */
+.video-container {
+  position: relative;
+  background: #000;
+  line-height: 0;
+}
+
+.memory-video {
+  width: 100%;
+  display: block;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #000;
+}
+
+/* Big play overlay before first play */
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 5, 20, 0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.video-play-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-play-heart {
+  font-size: 3.5rem;
+  animation: heartPulse 1.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 20px rgba(255, 101, 132, 0.8));
+}
+
+.video-play-hint {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-soft);
+  letter-spacing: 0.5px;
+}
+
+/* Custom video controls bar */
+.video-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(10, 5, 20, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 4;
+}
+
+.vid-btn {
+  background: rgba(255, 101, 132, 0.2);
+  border: 1px solid rgba(255, 101, 132, 0.4);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--trans-smooth);
+  flex-shrink: 0;
+}
+
+.vid-btn:hover {
+  background: rgba(255, 101, 132, 0.45);
+  border-color: var(--rose-light);
+  transform: scale(1.1);
+}
+
+.vid-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.vid-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--rose-primary), var(--gold-accent));
+  border-radius: 10px;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+.vid-mute,
+.vid-fullscreen {
+  font-size: 1rem;
+}
+
+/* Caption below the video */
+.video-caption-line {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--rose-light);
+  max-width: 600px;
+  margin: 20px auto 0;
+  opacity: 0.9;
+  text-shadow: 0 0 20px var(--rose-glow);
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .video-frame-wrapper {
+    border-radius: 12px;
+  }
+  .vid-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  .video-caption-line {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================
    INTERACTIVE 3D ENVELOPE & LETTER
    ========================================================== */
 .letter-section {

@@ -16,7 +16,7 @@ const CONFIG = {
   // 2. HER BIRTHDAY DATE (Year, Month, Day, Hour:Minute:Second)
   // Format: "YYYY-MM-DDTHH:mm:ss" in 24-hour format
   // Example for December 5th, 2026 at Midnight IST: "2026-12-05T00:00:00"
-  birthdayDate: "2026-11-28T00:00:00", 
+  birthdayDate: "2026-11-22T00:00:00", 
   
   // Timezone setting: IST is +05:30 (India Standard Time)
   timezoneOffsetHours: 5.5,
@@ -95,7 +95,14 @@ const CONFIG = {
     signature: "— Yours, always."
   },
 
-  // 6. MUSIC CONFIGURATION
+  // 6. VIDEO MEMORY 🎞️
+  // Drop your video file in 'assets/' folder and name it 'video.mp4'
+  // Supported formats: .mp4 (recommended), .webm
+  // Keep it under ~50MB for smooth mobile loading
+  videoFile: "assets/video.mp4",
+  videoCaption: "\"Every second of this — I would live it a thousand times over.\" ❤️",
+
+  // 7. MUSIC CONFIGURATION
   // Drop your mp3 file in 'assets/music.mp3'
   // If the file is missing, the site plays a built-in gentle romantic piano/music-box chime melody automatically!
   musicFile: "assets/music.mp3",

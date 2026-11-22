@@ -136,6 +136,56 @@
       </div>
     </section>
 
+    <!-- ========================================== -->
+    <!-- SECTION 3.5: Our Video Memory             -->
+    <!-- ========================================== -->
+    <section class="video-memory-section" id="videoMemorySection">
+      <div class="section-badge">
+        <span>A Moving Memory 🎞️</span>
+      </div>
+      <h2 class="section-title">Our Moments, Alive</h2>
+      <p class="section-desc">Close your eyes, press play, and feel it all over again.</p>
+
+      <div class="video-frame-wrapper">
+        <div class="video-film-strip top"></div>
+        <div class="video-container" id="videoContainer">
+          <!-- Heart overlay shown before play -->
+          <div class="video-play-overlay" id="videoPlayOverlay">
+            <div class="video-play-heart">🎥</div>
+            <p class="video-play-hint">Tap to play our memory</p>
+          </div>
+          <video
+            id="memoryVideo"
+            class="memory-video"
+            playsinline
+            loop
+            preload="metadata"
+            poster=""
+          >
+            <source src="assets/video.mp4" type="video/mp4">
+            <source src="assets/video.webm" type="video/webm">
+          </video>
+        </div>
+        <div class="video-film-strip bottom"></div>
+
+        <!-- Video Controls -->
+        <div class="video-controls" id="videoControls">
+          <button class="vid-btn" id="vidPlayPauseBtn" aria-label="Play / Pause">
+            <span id="vidPlayIcon">▶</span>
+          </button>
+          <div class="vid-progress-bar" id="vidProgressBar">
+            <div class="vid-progress-fill" id="vidProgressFill"></div>
+          </div>
+          <button class="vid-btn vid-mute" id="vidMuteBtn" aria-label="Mute / Unmute">
+            <span id="vidMuteIcon">🔊</span>
+          </button>
+          <button class="vid-btn vid-fullscreen" id="vidFullscreenBtn" aria-label="Fullscreen">⛶</button>
+        </div>
+      </div>
+
+      <p class="video-caption-line" id="videoCaptionLine">"Every second of this — I would live it a thousand times over." ❤️</p>
+    </section>
+
     <!-- SECTION 4: The Final Birthday Letter -->
     <section class="letter-section" id="letterSection">
       <div class="section-badge">
