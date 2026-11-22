@@ -16,7 +16,7 @@ const CONFIG = {
   // 2. HER BIRTHDAY DATE (Year, Month, Day, Hour:Minute:Second)
   // Format: "YYYY-MM-DDTHH:mm:ss" in 24-hour format
   // Example for December 5th, 2026 at Midnight IST: "2026-12-05T00:00:00"
-  birthdayDate: "2026-11-21T00:00:00", 
+  birthdayDate: "2026-11-28T00:00:00", 
   
   // Timezone setting: IST is +05:30 (India Standard Time)
   timezoneOffsetHours: 5.5,
