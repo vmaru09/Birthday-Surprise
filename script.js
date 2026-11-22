@@ -9,6 +9,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Initial State & Configuration
   let countdownInterval = null;
+  let isUnlockedPreview = false;
   let isPlayingMusic = false;
   let webAudioContext = null;
   let synthInterval = null;
